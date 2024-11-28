@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KalkulatorController;
 use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TransOrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,11 +18,16 @@ use Illuminate\Support\Facades\Route;
 // put : mengirim data dari form (update)
 // delete : mengirim data dari form (delete)
 Route::get('/', [LoginController::class, 'index']);
+Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('actionLogin', [LoginController::class, 'actionLogin'])->name('actionLogin');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 //grouping routing setelah login
 Route::middleware(['auth'])->group(function(){
     Route::resource('dashboard', DashboardController::class);
+    Route::resource('service', ServiceController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('trans_order', TransOrderController::class);
 });
 Route::get('latihan', [LatihanController::class, 'index']);
 Route::get('edit/{id}', [LatihanController::class, 'edit']);
