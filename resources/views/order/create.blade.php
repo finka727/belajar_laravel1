@@ -15,6 +15,16 @@
                             <label for="">Tanggal Laundry</label>
                             <input type="date" class="form-control" name="order_date">
                         </div>
+                        <div class="mb-3">
+                            <label for="">Paket</label>
+                            <select name="" id="id_paket" class="form-control">
+                                <option value="">--Pilih Paket--</option>
+                                @foreach ($services as $service)
+                                    <option value="{{$service->id}}">{{$service->service_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="hidden" id="price">
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
@@ -30,6 +40,10 @@
                             <label for="">Tanggal Pengembalian</label>
                             <input type="date" class="form-control" name="order_end_date">
                         </div>
+                        <div class="mb-3">
+                            <label for="">Qty (kg)</label>
+                            <input type="number" class="qty form-control" placeholder="Masukkan Qty">
+                        </div>
                     </div>
                 </div>
                 <div align="right" class="mb-3">
@@ -40,19 +54,22 @@
                         <thead>
                             <tr>
                                 <th>Nama Paket</th>
-                                <th>Qty</th>
                                 <th>Harga</th>
+                                <th>Qty</th>
                                 <th>Subtotal</th>
                             </tr>
                         </thead>
                         <tbody class="tbody-parent">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td>
+                                    <input type="number" class="total-harga form-control" name="total_price" readonly>
+                                    <input type="hidden" name="order_status" value="0">
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="mb-3">
